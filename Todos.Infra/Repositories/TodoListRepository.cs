@@ -22,6 +22,12 @@ public class TodoListRepository : ITodoListRepository
         return todoList;
     }
 
+    public async Task Delete(TodoList todoList)
+    {
+        var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
+        await todoLists.DeleteOneAsync<TodoList>(t => t.Id == todoList.Id);
+    }
+
     public Task<IEnumerable<TodoList>> GetAll()
     {
         var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);

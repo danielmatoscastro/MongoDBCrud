@@ -64,3 +64,7 @@ Response:
     "todos": []
 }
 ```
+
+## DELETE /todo-lists/:id
+
+Response: 204 No Content

@@ -42,4 +42,18 @@ public class TodoListsController : ControllerBase
         todoListEntity = await _todoListRepository.Create(todoListEntity);
         return CreatedAtAction(nameof(GetTodoList), new { id = todoListEntity.Id }, todoListEntity);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTodoList(string id)
+    {
+        var todoListEntity = await _todoListRepository.GetById(id);
+        if (todoListEntity == null)
+        {
+            return NotFound();
+        }
+
+        await _todoListRepository.Delete(todoListEntity);
+
+        return NoContent();
+    }
 }

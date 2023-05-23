@@ -51,3 +51,16 @@ Response:
     },
 ]
 ```
+
+## GET /todo-lists/:id
+
+Response:
+```json
+{
+    "id": "5e3fda3b-629c-4f8c-8483-95ea55a1733c",
+    "name": "TODO List Name",
+    "owner": "14fae74c-616c-4f48-afb7-1b4f6af7f055",
+    "createdAt": "2018-12-10T13:45:00.000Z",
+    "todos": []
+}
+```

@@ -22,6 +22,13 @@ public class TodoListRepository : ITodoListRepository
         return todoList;
     }
 
+    public Task<IEnumerable<TodoList>> GetAll()
+    {
+        var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
+        var data = todoLists.Find<TodoList>(_ => true).ToEnumerable();
+        return Task.FromResult(data);
+    }
+
     public Task<TodoList> GetById(string id)
     {
         var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);

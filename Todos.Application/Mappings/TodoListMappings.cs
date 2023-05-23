@@ -14,6 +14,9 @@ public static class TodoListMappings
         Items = todoList.Items.ToReadTodoDTO()
     };
 
+    public static IEnumerable<ReadTodoListDTO> ToReadTodoListDTO(this IEnumerable<TodoList> todoLists) =>
+        todoLists.Select(t => t.ToReadTodoListDTO());
+
     public static TodoList ToTodoListEntity(this CreateTodoListDTO createTodoListDTO) =>
         new TodoList(createTodoListDTO.Owner, createTodoListDTO.Name);
 }

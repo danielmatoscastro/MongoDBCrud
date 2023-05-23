@@ -16,6 +16,13 @@ public class TodoListsController : ControllerBase
         _todoListRepository = todoListRepository;
     }
 
+    [HttpGet]
+    public async Task<IActionResult> GetTodoLists()
+    {
+        var todoListEntities = await _todoListRepository.GetAll();
+        return Ok(todoListEntities.ToReadTodoListDTO());
+    }
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetTodoList(string id)
     {

@@ -1,3 +1,4 @@
+using MongoDB.Driver;
 using Todos.Domain.Entities;
 using Todos.Domain.Repositories;
 
@@ -16,5 +17,12 @@ public class UserRepository : IUserRepository
         var users = _mongoDBDataAccess.GetCollection<User>(usersCollection);
         await users.InsertOneAsync(user);
         return user;
+    }
+
+    public Task<User> GetById(string id)
+    {
+        var users = _mongoDBDataAccess.GetCollection<User>(usersCollection);
+        var filter = Builders<User>.Filter.Eq("Id", id);
+        return users.Find<User>(filter).FirstOrDefaultAsync();
     }
 }

@@ -17,9 +17,15 @@ public class UsersController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public Task<IActionResult> GetUser(string id)
+    public async Task<IActionResult> GetUser(string id)
     {
-        throw new NotImplementedException();
+        var userEntity = await _userRepository.GetById(id);
+        if (userEntity == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(userEntity.ToReadUserDTO());
     }
 
     [HttpPost]

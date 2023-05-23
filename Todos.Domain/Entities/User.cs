@@ -12,4 +12,15 @@ public class User
     public string Name { get; set; } = null!;
 
     public DateTime CreatedAt { get; set; }
+
+    public User()
+    {
+        CreatedAt = DateTime.Now;
+    }
+
+    public User(string name)
+    {
+        Name = name;
+        CreatedAt = DateTime.Now;
+    }
 }

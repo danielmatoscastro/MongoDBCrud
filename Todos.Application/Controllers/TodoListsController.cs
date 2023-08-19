@@ -151,4 +151,24 @@ public class TodoListsController : ControllerBase
 
         return Ok(todoEntity.ToReadTodoDTO());
     }
+
+    [HttpDelete("{todoListId}/items/{todoId}")]
+    public async Task<IActionResult> DeleteTodo(string todoListId, string todoId)
+    {
+        var todoListEntity = await _todoListRepository.GetById(todoListId);
+        if (todoListEntity == null)
+        {
+            return NotFound();
+        }
+
+        var amountRemoved = todoListEntity.Items.RemoveAll(item => item.Id == todoId);
+        if (amountRemoved == 0)
+        {
+            return NotFound();
+        }
+
+        await _todoListRepository.Update(todoListEntity);
+
+        return NoContent();
+    }
 }

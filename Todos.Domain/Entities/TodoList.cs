@@ -1,15 +1,9 @@
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
 namespace Todos.Domain.Entities;
 
 public class TodoList
 {
-    [BsonId]
-    [BsonGuidRepresentation(GuidRepresentation.Standard)]
     public Guid Id { get; set; }
 
-    [BsonGuidRepresentation(GuidRepresentation.Standard)]
     public Guid Owner { get; set; }
 
     public string Name { get; set; } = null!;

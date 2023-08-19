@@ -23,8 +23,8 @@ public class TodoListsController : ControllerBase
         return Ok(todoListEntities.ToReadTodoListDTO());
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetTodoList(string id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetTodoList(Guid id)
     {
         var todoListEntity = await _todoListRepository.GetById(id);
         if (todoListEntity == null)
@@ -43,8 +43,8 @@ public class TodoListsController : ControllerBase
         return CreatedAtAction(nameof(GetTodoList), new { id = todoListEntity.Id }, todoListEntity);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTodoList(string id)
+    [HttpDelete("{id:guid}")]
+    public async Task<IActionResult> DeleteTodoList(Guid id)
     {
         var todoListEntity = await _todoListRepository.GetById(id);
         if (todoListEntity == null)
@@ -57,8 +57,8 @@ public class TodoListsController : ControllerBase
         return NoContent();
     }
 
-    [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateTodoList(string id, [FromBody] UpdateTodoListDTO updateTodoListDTO)
+    [HttpPut("{id:guid}")]
+    public async Task<IActionResult> UpdateTodoList(Guid id, [FromBody] UpdateTodoListDTO updateTodoListDTO)
     {
         var todoListEntity = await _todoListRepository.GetById(id);
         if (todoListEntity == null)
@@ -73,8 +73,8 @@ public class TodoListsController : ControllerBase
         return Ok(todoListEntity.ToReadTodoListDTO());
     }
 
-    [HttpPost("{todoListId}/items")]
-    public async Task<IActionResult> CreateTodo(string todoListId, [FromBody] CreateTodoDTO createTodoDTO)
+    [HttpPost("{todoListId:guid}/items")]
+    public async Task<IActionResult> CreateTodo(Guid todoListId, [FromBody] CreateTodoDTO createTodoDTO)
     {
         var todoListEntity = await _todoListRepository.GetById(todoListId);
         if (todoListEntity == null)
@@ -88,8 +88,8 @@ public class TodoListsController : ControllerBase
         return CreatedAtAction(nameof(GetTodo), new { todoListId, todoId = todoEntity.Id }, todoEntity.ToReadTodoDTO());
     }
 
-    [HttpGet("{todoListId}/items/{todoId}")]
-    public async Task<IActionResult> GetTodo(string todoListId, string todoId)
+    [HttpGet("{todoListId:guid}/items/{todoId:guid}")]
+    public async Task<IActionResult> GetTodo(Guid todoListId, Guid todoId)
     {
         var todoListEntity = await _todoListRepository.GetById(todoListId);
         if (todoListEntity == null)
@@ -106,8 +106,8 @@ public class TodoListsController : ControllerBase
         return Ok(todoEntity.ToReadTodoDTO());
     }
 
-    [HttpPost("{todoListId}/items/{todoId}")]
-    public async Task<IActionResult> ToogleCompletedTodo(string todoListId, string todoId)
+    [HttpPost("{todoListId:guid}/items/{todoId:guid}")]
+    public async Task<IActionResult> ToogleCompletedTodo(Guid todoListId, Guid todoId)
     {
         var todoListEntity = await _todoListRepository.GetById(todoListId);
         if (todoListEntity == null)
@@ -129,8 +129,8 @@ public class TodoListsController : ControllerBase
         return Ok(todoEntity.ToReadTodoDTO());
     }
 
-    [HttpPut("{todoListId}/items/{todoId}")]
-    public async Task<IActionResult> UpdateTodo(string todoListId, string todoId, [FromBody] UpdateTodoDTO updateTodoDTO)
+    [HttpPut("{todoListId:guid}/items/{todoId:guid}")]
+    public async Task<IActionResult> UpdateTodo(Guid todoListId, Guid todoId, [FromBody] UpdateTodoDTO updateTodoDTO)
     {
         var todoListEntity = await _todoListRepository.GetById(todoListId);
         if (todoListEntity == null)
@@ -152,8 +152,8 @@ public class TodoListsController : ControllerBase
         return Ok(todoEntity.ToReadTodoDTO());
     }
 
-    [HttpDelete("{todoListId}/items/{todoId}")]
-    public async Task<IActionResult> DeleteTodo(string todoListId, string todoId)
+    [HttpDelete("{todoListId:guid}/items/{todoId:guid}")]
+    public async Task<IActionResult> DeleteTodo(Guid todoListId, Guid todoId)
     {
         var todoListEntity = await _todoListRepository.GetById(todoListId);
         if (todoListEntity == null)

@@ -6,20 +6,16 @@ namespace Todos.Domain.Entities;
 public class User
 {
     [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; } = null!;
+    [BsonGuidRepresentation(GuidRepresentation.Standard)]
+    public Guid Id { get; set; }
 
     public string Name { get; set; } = null!;
 
     public DateTime CreatedAt { get; set; }
 
-    public User()
-    {
-        CreatedAt = DateTime.Now;
-    }
-
     public User(string name)
     {
+        Id = Guid.NewGuid();
         Name = name;
         CreatedAt = DateTime.Now;
     }

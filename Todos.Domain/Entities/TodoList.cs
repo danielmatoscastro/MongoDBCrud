@@ -6,10 +6,11 @@ namespace Todos.Domain.Entities;
 public class TodoList
 {
     [BsonId]
-    [BsonRepresentation(BsonType.ObjectId)]
-    public string Id { get; set; } = null!;
+    [BsonGuidRepresentation(GuidRepresentation.Standard)]
+    public Guid Id { get; set; }
 
-    public string Owner { get; set; } = null!;
+    [BsonGuidRepresentation(GuidRepresentation.Standard)]
+    public Guid Owner { get; set; }
 
     public string Name { get; set; } = null!;
 
@@ -17,10 +18,9 @@ public class TodoList
 
     public List<Todo> Items { get; set; } = new();
 
-    public TodoList() { }
-
-    public TodoList(string owner, string name)
+    public TodoList(Guid owner, string name)
     {
+        Id = Guid.NewGuid();
         Owner = owner;
         Name = name;
         CreatedAt = DateTime.Now;

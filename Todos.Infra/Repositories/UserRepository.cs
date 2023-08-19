@@ -19,7 +19,7 @@ public class UserRepository : IUserRepository
         return user;
     }
 
-    public Task<User> GetById(string id)
+    public Task<User> GetById(Guid id)
     {
         var users = _mongoDBDataAccess.GetCollection<User>(usersCollection);
         var filter = Builders<User>.Filter.Eq("Id", id);

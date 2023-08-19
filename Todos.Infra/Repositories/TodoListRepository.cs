@@ -23,9 +23,8 @@ public class TodoListRepository : ITodoListRepository
         return todoList;
     }
 
-    public async Task<Todo> CreateItem(string todoListId, Todo todo)
+    public async Task<Todo> CreateItem(Guid todoListId, Todo todo)
     {
-        todo.Id = ObjectId.GenerateNewId().ToString();
         var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
         var filter = Builders<TodoList>.Filter.Eq("Id", todoListId);
         var update = Builders<TodoList>.Update.AddToSet(todoList => todoList.Items, todo);
@@ -46,10 +45,10 @@ public class TodoListRepository : ITodoListRepository
         return Task.FromResult(data);
     }
 
-    public Task<TodoList> GetById(string id)
+    public Task<TodoList> GetById(Guid id)
     {
         var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
-        var filter = Builders<TodoList>.Filter.Eq("Id", id);
+        var filter = Builders<TodoList>.Filter.Eq(new StringFieldDefinition<TodoList, Guid>("_id"), id);
         return todoLists.Find<TodoList>(filter).FirstOrDefaultAsync();
     }
 

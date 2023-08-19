@@ -16,8 +16,8 @@ public class UsersController : ControllerBase
         _userRepository = userRepository;
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetUser(string id)
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetUser(Guid id)
     {
         var userEntity = await _userRepository.GetById(id);
         if (userEntity == null)

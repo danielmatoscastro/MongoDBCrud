@@ -8,4 +8,5 @@ public interface ITodoListRepository
     Task Delete(TodoList todoList);
     Task<IEnumerable<TodoList>> GetAll();
     Task<TodoList> GetById(string id);
+    Task Update(TodoList todoList);
 }

@@ -56,4 +56,20 @@ public class TodoListsController : ControllerBase
 
         return NoContent();
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateTodoList(string id, [FromBody] UpdateTodoListDTO updateTodoListDTO)
+    {
+        var todoListEntity = await _todoListRepository.GetById(id);
+        if (todoListEntity == null)
+        {
+            return NotFound();
+        }
+
+        todoListEntity.Name = updateTodoListDTO.Name;
+
+        await _todoListRepository.Update(todoListEntity);
+
+        return Ok(todoListEntity.ToReadTodoListDTO());
+    }
 }

@@ -41,4 +41,11 @@ public class TodoListRepository : ITodoListRepository
         var filter = Builders<TodoList>.Filter.Eq("Id", id);
         return todoLists.Find<TodoList>(filter).FirstOrDefaultAsync();
     }
+
+    public async Task Update(TodoList todoList)
+    {
+        var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
+        var filter = Builders<TodoList>.Filter.Eq("Id", todoList.Id);
+        await todoLists.ReplaceOneAsync(filter, todoList);
+    }
 }

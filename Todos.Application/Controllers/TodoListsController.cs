@@ -83,7 +83,8 @@ public class TodoListsController : ControllerBase
         }
 
         var todoEntity = createTodoDTO.ToTodoEntity();
-        await _todoListRepository.CreateItem(todoListId, todoEntity);
+        todoListEntity.Items.Add(todoEntity);
+        await _todoListRepository.Update(todoListEntity);
 
         return CreatedAtAction(nameof(GetTodo), new { todoListId, todoId = todoEntity.Id }, todoEntity.ToReadTodoDTO());
     }

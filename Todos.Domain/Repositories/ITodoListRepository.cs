@@ -9,5 +9,4 @@ public interface ITodoListRepository
     Task<IEnumerable<TodoList>> GetAll();
     Task<TodoList> GetById(Guid id);
     Task Update(TodoList todoList);
-    Task<Todo> CreateItem(Guid todoListId, Todo todo);
 }

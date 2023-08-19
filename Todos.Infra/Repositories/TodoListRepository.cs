@@ -23,15 +23,6 @@ public class TodoListRepository : ITodoListRepository
         return todoList;
     }
 
-    public async Task<Todo> CreateItem(Guid todoListId, Todo todo)
-    {
-        var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
-        var filter = Builders<TodoList>.Filter.Eq("Id", todoListId);
-        var update = Builders<TodoList>.Update.AddToSet(todoList => todoList.Items, todo);
-        await todoLists.UpdateOneAsync(filter, update);
-        return todo;
-    }
-
     public async Task Delete(TodoList todoList)
     {
         var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);

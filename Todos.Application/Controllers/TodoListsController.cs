@@ -128,4 +128,27 @@ public class TodoListsController : ControllerBase
 
         return Ok(todoEntity.ToReadTodoDTO());
     }
+
+    [HttpPut("{todoListId}/items/{todoId}")]
+    public async Task<IActionResult> UpdateTodo(string todoListId, string todoId, [FromBody] UpdateTodoDTO updateTodoDTO)
+    {
+        var todoListEntity = await _todoListRepository.GetById(todoListId);
+        if (todoListEntity == null)
+        {
+            return NotFound();
+        }
+
+        var todoEntity = todoListEntity.Items.FirstOrDefault(item => item.Id == todoId);
+        if (todoEntity == null)
+        {
+            return NotFound();
+        }
+
+        todoEntity.Content = updateTodoDTO.Content;
+        todoEntity.DueDate = updateTodoDTO.DueDate;
+
+        await _todoListRepository.Update(todoListEntity);
+
+        return Ok(todoEntity.ToReadTodoDTO());
+    }
 }

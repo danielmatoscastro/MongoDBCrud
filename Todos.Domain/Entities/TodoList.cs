@@ -2,15 +2,17 @@ namespace Todos.Domain.Entities;
 
 public class TodoList
 {
-    public Guid Id { get; set; }
+    private List<Todo> _items;
 
-    public Guid Owner { get; set; }
+    public Guid Id { get; private set; }
 
-    public string Name { get; set; } = null!;
+    public Guid Owner { get; private set; }
 
-    public DateTime CreatedAt { get; set; }
+    public string Name { get; private set; }
 
-    public List<Todo> Items { get; set; } = new();
+    public DateTime CreatedAt { get; private set; }
+
+    public IReadOnlyCollection<Todo> Items { get => _items.AsReadOnly(); }
 
     public TodoList(Guid owner, string name)
     {
@@ -18,6 +20,10 @@ public class TodoList
         Owner = owner;
         Name = name;
         CreatedAt = DateTime.Now;
-        Items = new List<Todo>();
+        _items = new List<Todo>();
     }
+
+    public void SetName(string name) => Name = name;
+    public void AddItem(Todo todo) => _items.Add(todo);
+    public int RemoveItem(Guid todoId) => _items.RemoveAll(item => item.Id == todoId);
 }

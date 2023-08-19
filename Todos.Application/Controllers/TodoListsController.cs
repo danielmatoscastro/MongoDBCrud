@@ -66,7 +66,7 @@ public class TodoListsController : ControllerBase
             return NotFound();
         }
 
-        todoListEntity.Name = updateTodoListDTO.Name;
+        todoListEntity.SetName(updateTodoListDTO.Name);
 
         await _todoListRepository.Update(todoListEntity);
 
@@ -83,7 +83,7 @@ public class TodoListsController : ControllerBase
         }
 
         var todoEntity = createTodoDTO.ToTodoEntity();
-        todoListEntity.Items.Add(todoEntity);
+        todoListEntity.AddItem(todoEntity);
         await _todoListRepository.Update(todoListEntity);
 
         return CreatedAtAction(nameof(GetTodo), new { todoListId, todoId = todoEntity.Id }, todoEntity.ToReadTodoDTO());
@@ -122,8 +122,7 @@ public class TodoListsController : ControllerBase
             return NotFound();
         }
 
-        todoEntity.CompletedAt = todoEntity.Completed ? null : DateTime.UtcNow;
-        todoEntity.Completed = !todoEntity.Completed;
+        todoEntity.ToogleCompleted();
 
         await _todoListRepository.Update(todoListEntity);
 
@@ -145,8 +144,8 @@ public class TodoListsController : ControllerBase
             return NotFound();
         }
 
-        todoEntity.Content = updateTodoDTO.Content;
-        todoEntity.DueDate = updateTodoDTO.DueDate;
+        todoEntity.SetContent(updateTodoDTO.Content);
+        todoEntity.SetDueDate(updateTodoDTO.DueDate);
 
         await _todoListRepository.Update(todoListEntity);
 
@@ -162,7 +161,7 @@ public class TodoListsController : ControllerBase
             return NotFound();
         }
 
-        var amountRemoved = todoListEntity.Items.RemoveAll(item => item.Id == todoId);
+        var amountRemoved = todoListEntity.RemoveItem(todoId);
         if (amountRemoved == 0)
         {
             return NotFound();

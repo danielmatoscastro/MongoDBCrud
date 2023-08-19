@@ -72,4 +72,37 @@ public class TodoListsController : ControllerBase
 
         return Ok(todoListEntity.ToReadTodoListDTO());
     }
+
+    [HttpPost("{todoListId}/items")]
+    public async Task<IActionResult> CreateTodo(string todoListId, [FromBody] CreateTodoDTO createTodoDTO)
+    {
+        var todoListEntity = await _todoListRepository.GetById(todoListId);
+        if (todoListEntity == null)
+        {
+            return NotFound();
+        }
+
+        var todoEntity = createTodoDTO.ToTodoEntity();
+        await _todoListRepository.CreateItem(todoListId, todoEntity);
+
+        return CreatedAtAction(nameof(GetTodo), new { todoListId, todoId = todoEntity.Id }, todoEntity.ToReadTodoDTO());
+    }
+
+    [HttpGet("{todoListId}/items/{todoId}")]
+    public async Task<IActionResult> GetTodo(string todoListId, string todoId)
+    {
+        var todoListEntity = await _todoListRepository.GetById(todoListId);
+        if (todoListEntity == null)
+        {
+            return NotFound();
+        }
+
+        var todoEntity = todoListEntity.Items.FirstOrDefault(item => item.Id == todoId);
+        if (todoEntity == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(todoEntity.ToReadTodoDTO());
+    }
 }

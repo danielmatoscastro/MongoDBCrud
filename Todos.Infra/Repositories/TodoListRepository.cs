@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Todos.Domain.Entities;
 using Todos.Domain.Repositories;
@@ -20,6 +21,16 @@ public class TodoListRepository : ITodoListRepository
         var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
         await todoLists.InsertOneAsync(todoList);
         return todoList;
+    }
+
+    public async Task<Todo> CreateItem(string todoListId, Todo todo)
+    {
+        todo.Id = ObjectId.GenerateNewId().ToString();
+        var todoLists = _mongoDBDataAccess.GetCollection<TodoList>(todoListCollection);
+        var filter = Builders<TodoList>.Filter.Eq("Id", todoListId);
+        var update = Builders<TodoList>.Update.AddToSet(todoList => todoList.Items, todo);
+        await todoLists.UpdateOneAsync(filter, update);
+        return todo;
     }
 
     public async Task Delete(TodoList todoList)

@@ -1,7 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Todos.Domain.Entities;
-using Todos.Domain.Repositories;
+using Todos.Core.Entities;
+using Todos.Core.Repositories;
 
 namespace Todos.Infra.Repositories;
 

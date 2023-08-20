@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todos.Application", "Todos.Application\Todos.Application.csproj", "{5A35F3EB-3455-45E9-84D8-F463590917E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todos.Domain", "Todos.Domain\Todos.Domain.csproj", "{EC27711B-6CAE-4E99-890B-F2F0819F273D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todos.Core", "Todos.Core\Todos.Core.csproj", "{EC27711B-6CAE-4E99-890B-F2F0819F273D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Todos.Infra", "Todos.Infra\Todos.Infra.csproj", "{40CBC217-ACFB-4506-9494-3262C0B8D54B}"
 EndProject

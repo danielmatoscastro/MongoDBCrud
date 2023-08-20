@@ -1,5 +1,5 @@
 using Todos.Application.Dtos;
-using Todos.Domain.Entities;
+using Todos.Core.Entities;
 
 namespace Todos.Application.Mappings;
 

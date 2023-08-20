@@ -1,6 +1,6 @@
-using Todos.Domain.Entities;
+using Todos.Core.Entities;
 
-namespace Todos.Domain.Repositories;
+namespace Todos.Core.Repositories;
 
 public interface ITodoListRepository
 {

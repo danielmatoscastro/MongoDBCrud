@@ -1,8 +1,8 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
-using Todos.Domain.Entities;
-using Todos.Domain.Repositories;
+using Todos.Core.Entities;
+using Todos.Core.Repositories;
 using Todos.Infra.Options;
 using Todos.Infra.Repositories;
 

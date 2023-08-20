@@ -1,4 +1,4 @@
-namespace Todos.Domain.Entities;
+namespace Todos.Core.Entities;
 
 public class User
 {

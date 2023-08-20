@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Todos.Application.Dtos;
 using Todos.Application.Mappings;
-using Todos.Domain.Repositories;
+using Todos.Core.Repositories;
 
 namespace Todos.Application.Controllers;
 

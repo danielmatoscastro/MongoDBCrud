@@ -1,7 +1,7 @@
-using Todos.Application.Dtos;
+using Todos.Api.Dtos;
 using Todos.Core.Entities;
 
-namespace Todos.Application.Mappings;
+namespace Todos.Api.Mappings;
 
 public static class TodoListMappings
 {

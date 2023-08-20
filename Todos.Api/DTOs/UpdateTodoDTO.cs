@@ -1,6 +1,6 @@
-namespace Todos.Application.Dtos;
+namespace Todos.Api.Dtos;
 
-public class CreateTodoDTO
+public class UpdateTodoDTO
 {
     public string Content { get; set; } = null!;
     public DateTime? DueDate { get; set; }

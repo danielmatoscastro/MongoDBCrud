@@ -10,9 +10,9 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Todos.Application/bin/Debug/net7.0/Todos.Application.dll",
+            "program": "${workspaceFolder}/Todos.Api/bin/Debug/net7.0/Todos.Api.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/Todos.Application",
+            "cwd": "${workspaceFolder}/Todos.Api",
             "stopAtEntry": false,
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"

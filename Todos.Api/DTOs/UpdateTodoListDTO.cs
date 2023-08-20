@@ -1,4 +1,4 @@
-namespace Todos.Application.Dtos;
+namespace Todos.Api.Dtos;
 
 public class UpdateTodoListDTO
 {

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
-using Todos.Application.Dtos;
-using Todos.Application.Mappings;
+using Todos.Api.Dtos;
+using Todos.Api.Mappings;
 using Todos.Core.Repositories;
 
-namespace Todos.Application.Controllers;
+namespace Todos.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]

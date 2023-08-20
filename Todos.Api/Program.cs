@@ -1,8 +1,11 @@
+using Microsoft.AspNetCore.Diagnostics;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using Todos.Api.Middlewares;
 using Todos.Core.Entities;
 using Todos.Core.Repositories;
+using Todos.Core.Services;
 using Todos.Infra.Options;
 using Todos.Infra.Repositories;
 
@@ -20,9 +23,11 @@ builder.Services.Configure<MongoDBOptions>(builder.Configuration.GetSection(Mong
 builder.Services.AddSingleton<MongoDBDataAccess>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITodoListRepository, TodoListRepository>();
+builder.Services.AddTransient<UserService>();
 builder.Services.AddControllers();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.MapControllers();
 app.MapGet("/", () => "raiz");
 app.Run();

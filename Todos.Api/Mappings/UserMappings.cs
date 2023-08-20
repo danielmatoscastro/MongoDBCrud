@@ -1,16 +1,19 @@
 using Todos.Api.Dtos;
-using Todos.Core.Entities;
+using Todos.Core.DTOs;
 
 namespace Todos.Api.Mappings;
 
 public static class UserMappings
 {
-    public static User ToUserEntity(this CreateUserDTO createUserDTO) => new User(createUserDTO.Name);
-
-    public static ReadUserDTO ToReadUserDTO(this User user) => new ReadUserDTO
+    public static UserDTO ToUserDTO(this CreateUserDTO createUserDTO) => new UserDTO
     {
-        Id = user.Id,
-        Name = user.Name,
-        CreatedAt = user.CreatedAt,
+        Name = createUserDTO.Name
+    };
+
+    public static ReadUserDTO ToReadUserDTO(this UserDTO userDTO) => new ReadUserDTO
+    {
+        Id = userDTO.Id,
+        Name = userDTO.Name,
+        CreatedAt = userDTO.CreatedAt
     };
 }

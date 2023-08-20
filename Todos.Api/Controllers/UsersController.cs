@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Todos.Api.Dtos;
 using Todos.Api.Mappings;
 using Todos.Core.Repositories;
+using Todos.Core.Services;
 
 namespace Todos.Api.Controllers;
 
@@ -9,30 +10,25 @@ namespace Todos.Api.Controllers;
 [Route("api/v1/[controller]")]
 public class UsersController : ControllerBase
 {
-    private readonly IUserRepository _userRepository;
+    private readonly UserService _userService;
 
-    public UsersController(IUserRepository userRepository)
+    public UsersController(UserService userService)
     {
-        _userRepository = userRepository;
+        _userService = userService;
     }
 
     [HttpGet("{id:guid}")]
     public async Task<IActionResult> GetUser(Guid id)
     {
-        var userEntity = await _userRepository.GetById(id);
-        if (userEntity == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(userEntity.ToReadUserDTO());
+        var userDTO = await _userService.GetById(id);
+        return Ok(userDTO.ToReadUserDTO());
     }
 
     [HttpPost]
     public async Task<IActionResult> CreateUser([FromBody] CreateUserDTO createUserDTO)
     {
-        var userEntity = createUserDTO.ToUserEntity();
-        userEntity = await _userRepository.Create(userEntity);
-        return CreatedAtAction(nameof(GetUser), new { id = userEntity.Id }, userEntity.ToReadUserDTO());
+        var userDTO = createUserDTO.ToUserDTO();
+        userDTO = await _userService.Create(userDTO);
+        return CreatedAtAction(nameof(GetUser), new { Id = userDTO.Id }, userDTO.ToReadUserDTO());
     }
 }
